@@ -1,0 +1,45 @@
+--body sizes: BodyHeightScale: 105%
+--            BodyWidthScale: 100%
+--            HeadScale: 100%
+--            BodyProportionScale: 0%
+--            AvatarPartScaleType: 100%
+
+wait(1)
+
+local LocalPlayer = game:GetService("Players").TailzDoIl
+local Character = LocalPlayer.Character
+local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+
+function rm()
+	for i,v in pairs(Character:GetDescendants()) do
+		if v:IsA("BasePart") then
+			if v.Name == "Handle" or v.Name == "Head" then
+				if Character.Head:FindFirstChild("OriginalSize") then
+					Character.Head.OriginalSize:Destroy()
+				end
+			else
+				for i,cav in pairs(v:GetDescendants()) do
+					if cav:IsA("Attachment") then
+						if cav:FindFirstChild("OriginalPosition") then
+							cav.OriginalPosition:Destroy()  
+						end
+					end
+				end
+				v:FindFirstChild("OriginalSize"):Destroy()
+				if v:FindFirstChild("AvatarPartScaleType") then
+					v:FindFirstChild("AvatarPartScaleType"):Destroy()
+				end
+			end
+		end
+	end
+end
+
+
+Humanoid:FindFirstChild("BodyWidthScale").Value = 1.2
+wait(0.001)
+
+Humanoid:FindFirstChild("BodyDepthScale").Value = 1.2
+wait(0.001)
+
+Humanoid:FindFirstChild("BodyHeightScale").Value = 1.3
+wait(0.001)
